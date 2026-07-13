@@ -1,0 +1,142 @@
+Model-First Migration (Preferred by Prisma)
+
+Flow:
+
+Edit schema.prisma
+        ↓
+Prisma detects the changes
+        ↓
+Generates SQL migration files
+        ↓
+Executes SQL on PostgreSQL
+        ↓
+Database is updated
+
+==================================================================
+
+Database-First Migration
+
+Flow:
+
+Write SQL manually
+        ↓
+Update PostgreSQL
+        ↓
+Prisma reads (introspects) the database
+        ↓
+Generates schema.prisma
+
+==================================================================
+
+What is Database Migration?
+
+Migration means: Making controlled changes to the database structure (schema).
+
+Examples:
+- Creating a new table
+- Adding a new column
+- Changing a data type
+- Adding constraints
+- Creating relationships
+
+---------------------------------------
+
+Migration History:
+
+Whenever a migration is created, Prisma generates SQL migration files.
+These SQL files are stored inside:
+prisma/
+    migrations/
+
+---------------------------------------
+
+Migration Table:
+
+Inside PostgreSQL, Prisma creates a table called;
+_prisma_migrations
+
+SELECT * FROM _prisma_migrations; - To see the migrations created
+
+==================================================================
+
+STEP 1:
+
+Write your models inside
+
+schema.prisma
+
+(Defines what your database should look like.)
+
+            │
+            ▼
+
+STEP 2:
+
+Use Prisma Migrate
+(Model-First Migration)
+
+Prisma compares the changes.
+
+            │
+            ▼
+
+STEP 3:
+
+Prisma generates SQL migration files
+
+Stored in:
+
+prisma/migrations
+
+            │
+            ▼
+
+STEP 4:
+
+Those SQL statements are executed on
+
+PostgreSQL
+
+(New tables are created or existing tables are updated.)
+
+            │
+            ▼
+
+STEP 5:
+
+Prisma records the migration
+
+Inside:
+
+prisma_migrations
+
+(Tracks which migrations have already been applied.)
+
+            │
+            ▼
+
+STEP 6:
+
+Use Prisma CLI
+
+Example:
+
+prisma generate
+
+Purpose:
+
+Generate (or regenerate) the Prisma Client based on the latest schema.
+
+            │
+            ▼
+
+STEP 7:
+
+Prisma Client is ready
+
+Your JavaScript application imports it.
+
+```javascript
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()

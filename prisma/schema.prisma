@@ -1,12 +1,22 @@
+// A configuration and blueprint file that tells Prisma (like server.js):
+// - Which database to connect to
+// - Which Prisma Client to generate
+// - What your database models should look like
+
+// Generate the Prisma Client for JavaScript.
+// Prisma Client is the tool your JavaScript code uses to communicate with PostgreSQL.
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output = "../generated/prisma"
 }
 
+// Tells Prisma which database to connect to.
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
+
+// NOTE: models do NOT create tables yet - descibes what database tables should look like
 
 model course {
   crseCode  String   @id @map("crse_code") @db.VarChar(5)
@@ -88,4 +98,8 @@ modCode String @id @map("mod_code") @db.VarChar(10) //Change this field’s type
 modName String @map("mod_name") @db.VarChar(100)
 creditUnit Int @map("credit_unit")
 modCoord String? @map("mod_coord") @db.Char(4) //Add this field
+}
+
+model staff_dependent {
+staffNo Int @map("staff_no")
 }
