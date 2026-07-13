@@ -82,3 +82,9 @@ model userRole {
 
   @@map("user_role")
 }
+
+model module {
+modCode Int @id @map("mod_code")
+modName String @map("mod_name") @db.VarChar(100)
+creditUnit Int @map("credit_unit")
+}
