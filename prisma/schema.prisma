@@ -110,11 +110,16 @@ relationship String @db.VarChar(20)
 }
 
 model preRequisite {
-modCode   String @map("mod_code") @db.VarChar(10)
+modCode String @map("mod_code") @db.VarChar(10)
 requisite String @db.VarChar(10)
 
 @@id([modCode, requisite])
 @@map("pre_requisite")
 }
 
+model country {
+countryName String @id @map("country_name") @db.VarChar(30)
+language String @db.VarChar(30)
+region String @db.VarChar(30)
+}
 
