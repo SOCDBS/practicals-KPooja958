@@ -103,17 +103,11 @@ modCoord String? @map("mod_coord") @db.Char(4)
 model staffDependent {
 staffNo String @map("staff_no") @db.Char(4)
 dependentName String @map("dependent_name") @db.VarChar(30)
-relationship String? @db.VarChar(20)
+relationship String @db.VarChar(20)
 
 @@id([staffNo, dependentName])
 @@map("staff_dependent")
 }
 
-model preRequisite {
-modCode String @map("mod_code") @db.VarChar(10)
-requisite String @db.VarChar(10)
 
-@@id([modCode, requisite])
-@@map("pre_requisite")
-}
 
