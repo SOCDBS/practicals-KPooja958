@@ -94,12 +94,18 @@ model userRole {
 }
 
 model module {
-modCode String @id @map("mod_code") @db.VarChar(10) //Change this field’s type
+modCode Int @id @map("mod_code")
 modName String @map("mod_name") @db.VarChar(100)
-creditUnit Int @map("credit_unit")
-modCoord String? @map("mod_coord") @db.Char(4) //Add this field
+creditUnit Int @map("credit_unit") 
+modCoord String? @map("mod_coord") @db.Char(4)
 }
 
-model staff_dependent {
-staffNo Int @map("staff_no")
+model staffDependent {
+staffNo String @map("staff_no") @db.Char(4)
+dependentName String @map("dependent_name") @db.VarChar(30)
+relationship String? @db.VarChar(20)
+
+@@id([staffNo, dependentName])
+@@map("staff_dependent")
 }
+

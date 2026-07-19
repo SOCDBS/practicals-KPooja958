@@ -1,3 +1,45 @@
+CLI 1: npm install prisma@6 --save-dev 
+(Installs the Prisma CLI to interact with prisma project, when developing)
+
+CLI 2: npx prisma init
+(Initialises Prisma - creates schema.prisma)
+
+CLI 3: npx prisma db pull
+(Prisma reads the database schema (this project has existing tables) 
+and translates it into Prisma models.)
+
+CLI 4: npm i prisma-case-format
+(Reformats names to camelCase)
+
+CLI 5: npx prisma-case-format --file "./prisma/schema.prisma" --map-table-case "snake" --table-case "camel"
+(Adds @map() and @@map())
+
+CLI 6: mkdir -p prisma\migrations\0_init
+(Creates: prisma/migrations/0_init/ folder - To store migration history)
+
+CLI 7: npx prisma migrate diff --from-empty --to-schema-datamodel prisma\schema.prisma --script >
+prisma\migrations\0_init\migration.sql
+(It compares empty databases with schema.prisma and asks
+"What SQL would I need to create this database?" and then writes 
+it into migration.sql BUT only generates SQL not execute it)
+
+NOTE: Change file encoding:
+Open migration.sql, enter (Ctrl+Shift+P), click 'Change file encoding', 
+select 'Save with encoding', select 'UTF-8'
+
+CLI 8: npx prisma migrate resolve --applied 0_init
+(Tells Prisma to pretend that migration has already been applied
+to prevent recreating tables that already exists in database, so
+creates _prisma_migrations in PgAdmin)
+
+CLI 9: npm install @prisma/client@6
+(Installs Prisma Client)
+
+CLI 10: npx prisma generate
+(Generates Prisma Client - Everytime changes is made to the code)
+
+==================================================================
+
 Model-First Migration (Preferred by Prisma)
 
 Flow:
@@ -140,3 +182,12 @@ Your JavaScript application imports it.
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
+
+
+model preRequisite {
+modCode String @map("mod_code") @db.VarChar(10)
+requisite String @db.VarChar(10)
+
+@@id([modCode, requisite])
+@@map("pre_requisite")
+}
