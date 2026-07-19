@@ -109,3 +109,11 @@ relationship String? @db.VarChar(20)
 @@map("staff_dependent")
 }
 
+model preRequisite {
+modCode String @map("mod_code") @db.VarChar(10)
+requisite String @db.VarChar(10)
+
+@@id([modCode, requisite])
+@@map("pre_requisite")
+}
+

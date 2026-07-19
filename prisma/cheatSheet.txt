@@ -184,10 +184,3 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 
-model preRequisite {
-modCode String @map("mod_code") @db.VarChar(10)
-requisite String @db.VarChar(10)
-
-@@id([modCode, requisite])
-@@map("pre_requisite")
-}
